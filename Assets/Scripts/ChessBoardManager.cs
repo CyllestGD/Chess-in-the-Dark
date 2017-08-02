@@ -19,8 +19,17 @@ public class ChessBoardManager : MonoBehaviour
     private float whiteFwdXPos = -17.5f;
     private int pieceHeight = 7;
 
+    private int drawBottom = -28;
+    private int drawTop = 28;
+    private int drawLeft = 28;
+    private int drawRight = -28;
+    private float drawHeight = 7.55f;
+
+
     public List<GameObject> chessPiecePrefabs;
     private List<GameObject> activeChessPieces;
+
+    public bool isWhiteTurn = true;
 
     private void Start()
     {
@@ -29,20 +38,54 @@ public class ChessBoardManager : MonoBehaviour
 
     private void Update()
     {
-        //DrawChessboard();
-        //UpdateSelection();
+        UpdateSelection();
+        DrawChessboard();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (selectionX >= 0 && selectionY >= 0)
+            {
+                if (selectedPiece == null)
+                {
+                    // Select the chess piece
+                    SelectChessPiece(selectionX, selectionY);
+                }
+                else
+                {
+                    // Move the chess piece
+
+                }
+            }
+        }
     }
 
-    private void UpdateIndex()
+    private void SelectChessPiece(int x, int y)
     {
+        if (ChessPieces[x, y] == null)
+            return;
 
+        if (ChessPieces[x, y].isWhite != isWhiteTurn)
+            return;
+
+        selectedPiece = ChessPieces[x, y];
+    }
+
+    private void MoveChessPiece(int x, int y)
+    {
+        if (selectedPiece.PossibleMove(x,y))
+        {
+            ChessPieces[selectedPiece.currentX, selectedPiece.currentY] = null;
+            //selectedPiece.transform.position = GetTileCenter(x,y);
+            ChessPieces [x, y] = selectedPiece;
+        }
+        selectedPiece = null;
     }
 
     private void SpawnChessPiece(int index, Vector3 position)
     {
         GameObject go = Instantiate(chessPiecePrefabs[index], position, chessPiecePrefabs[index].transform.rotation) as GameObject;
         go.transform.SetParent(transform);
-        ChessPieces[x, y] = go.GetComponent<ChessPiece>();
+        //ChessPieces[x, y] = go.GetComponent<ChessPiece>();
         activeChessPieces.Add(go);
     }
 
@@ -91,7 +134,7 @@ public class ChessBoardManager : MonoBehaviour
             SpawnChessPiece(11, new Vector3(whiteFwdXPos, pieceHeight, 24.5f));
     }
 
-    /*private void UpdateSelection()
+    private void UpdateSelection()
     {
         if (!Camera.main)
             return;
@@ -99,6 +142,7 @@ public class ChessBoardManager : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 25.0f, LayerMask.GetMask("ChessPlane")))
         {
+            Debug.Log(hit.point);
             selectionX = (int)hit.point.x;
             selectionY = (int)hit.point.y;
         }
@@ -107,32 +151,44 @@ public class ChessBoardManager : MonoBehaviour
             selectionX = -1;
             selectionY = -1;
         }
-    }*/
+    }
 
-    /*private void DrawChessboard()
+    private void GetTileCenter(int x, int y)
     {
-        Vector3 widthLine = Vector3.right * 8;
-        Vector3 heightLine = Vector3.forward * 8;
+        Vector3 origin = Vector3.zero;
+        origin.x += (tileSize * x);
+        origin.z += (tileSize * y);
+    }
 
-        for (int i = 0; i <= 8; i++)
-        {
-            Vector3 start = Vector3.forward * i;
-            Debug.DrawLine(start, start + widthLine);
+    private void DrawChessboard()
+    {
+        // Vertical Lines
+        Debug.DrawLine(new Vector3(drawBottom, drawHeight,  28), new Vector3(drawTop, drawHeight,  28));
+        Debug.DrawLine(new Vector3(drawBottom, drawHeight,  21), new Vector3(drawTop, drawHeight,  21));
+        Debug.DrawLine(new Vector3(drawBottom, drawHeight,  14), new Vector3(drawTop, drawHeight,  14));
+        Debug.DrawLine(new Vector3(drawBottom, drawHeight,   7), new Vector3(drawTop, drawHeight,   7));
+        Debug.DrawLine(new Vector3(drawBottom, drawHeight,   0), new Vector3(drawTop, drawHeight,   0));
+        Debug.DrawLine(new Vector3(drawBottom, drawHeight,  -7), new Vector3(drawTop, drawHeight,  -7));
+        Debug.DrawLine(new Vector3(drawBottom, drawHeight, -14), new Vector3(drawTop, drawHeight, -14));
+        Debug.DrawLine(new Vector3(drawBottom, drawHeight, -21), new Vector3(drawTop, drawHeight, -21));
+        Debug.DrawLine(new Vector3(drawBottom, drawHeight, -28), new Vector3(drawTop, drawHeight, -28));
 
-            start = Vector3.right * i;
-            Debug.DrawLine(start, start + heightLine);
-        }
+        // Horizontal Lines
+        Debug.DrawLine(new Vector3( 28, drawHeight, drawLeft), new Vector3( 28, drawHeight, drawRight));
+        Debug.DrawLine(new Vector3( 21, drawHeight, drawLeft), new Vector3( 21, drawHeight, drawRight));
+        Debug.DrawLine(new Vector3( 14, drawHeight, drawLeft), new Vector3( 14, drawHeight, drawRight));
+        Debug.DrawLine(new Vector3(  7, drawHeight, drawLeft), new Vector3(  7, drawHeight, drawRight));
+        Debug.DrawLine(new Vector3(  0, drawHeight, drawLeft), new Vector3(  0, drawHeight, drawRight));
+        Debug.DrawLine(new Vector3( -7, drawHeight, drawLeft), new Vector3( -7, drawHeight, drawRight));
+        Debug.DrawLine(new Vector3(-14, drawHeight, drawLeft), new Vector3(-14, drawHeight, drawRight));
+        Debug.DrawLine(new Vector3(-21, drawHeight, drawLeft), new Vector3(-21, drawHeight, drawRight));
+        Debug.DrawLine(new Vector3(-28, drawHeight, drawLeft), new Vector3(-28, drawHeight, drawRight));
 
-        // Draw the selection
-        if (selectionX >= 0 && selectionY >= 0)
+        if(selectionX >= 0 && selectionY >= 0)
         {
             Debug.DrawLine(
                 Vector3.forward * selectionY + Vector3.right * selectionX,
-                Vector3.forward * (selectionY + 1) + Vector3.right * (selectionX + 1));
-
-            Debug.DrawLine(
-                Vector3.forward * (selectionY + 1) + Vector3.right * selectionX,
-                Vector3.forward * selectionY + Vector3.right * (selectionX + 1));
+                Vector3.forward * (selectionY + 7) + Vector3.right * (selectionX + 7));
         }
-    }*/
+    }
 }
