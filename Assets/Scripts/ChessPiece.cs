@@ -4,18 +4,14 @@ using UnityEngine;
 
 public abstract class ChessPiece : MonoBehaviour
 {
-    public int currentX { set; get; }
-    public int currentY { set; get; }
     public bool isWhite;
 
-    public void SetPosition(int x, int y)
+    void OnTriggerEnter(Collider2D other)
     {
-        currentX = x;
-        currentY = y;
-    }
+        if (other.tag == "Fog")
+        {
+            other.gameObject.getcomponent<Renderer>().enabled = true;
+        }
 
-    public virtual bool PossibleMove(int x, int y)
-    {
-        return true;
     }
 }

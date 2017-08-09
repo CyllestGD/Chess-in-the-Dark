@@ -19,12 +19,30 @@ public class ChessBoardManager : MonoBehaviour
     private float whiteFwdXPos = -17.5f;
     private int pieceHeight = 7;
 
+    private float row1 = 24.5f;
+    private float row2 = 17.5f;
+    private float row3 = 10.5f;
+    private float row4 = 3.5f;
+    private float row5 = -3.5f;
+    private float row6 = -10.5f;
+    private float row7 = -17.5f;
+    private float row8 = -24.5f;
+    private float column1 = 24.5f;
+    private float column2 = 17.5f;
+    private float column3 = 10.5f;
+    private float column4 = 3.5f;
+    private float column5 = -3.5f;
+    private float column6 = -10.5f;
+    private float column7 = -17.5f;
+    private float column8 = -24.5f;
+
     private int drawBottom = -28;
     private int drawTop = 28;
     private int drawLeft = 28;
     private int drawRight = -28;
     private float drawHeight = 7.55f;
 
+    public Transform fog;
 
     public List<GameObject> chessPiecePrefabs;
     private List<GameObject> activeChessPieces;
@@ -34,12 +52,13 @@ public class ChessBoardManager : MonoBehaviour
     private void Start()
     {
         SpawnAllPieces();
+        PlaceholderFogSpawner();
     }
 
     private void Update()
     {
-        UpdateSelection();
-        DrawChessboard();
+        //UpdateSelection();
+        //DrawChessboard();
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -134,7 +153,89 @@ public class ChessBoardManager : MonoBehaviour
             SpawnChessPiece(11, new Vector3(whiteFwdXPos, pieceHeight, 24.5f));
     }
 
-    private void UpdateSelection()
+    private void PlaceholderFogSpawner() //DONT OPEN
+    {
+        Instantiate(fog, new Vector3(row1, pieceHeight, column1), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row1, pieceHeight, column2), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row1, pieceHeight, column3), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row1, pieceHeight, column4), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row1, pieceHeight, column5), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row1, pieceHeight, column6), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row1, pieceHeight, column7), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row1, pieceHeight, column8), Quaternion.Euler(0, 0, 0));
+
+
+        Instantiate(fog, new Vector3(row2, pieceHeight, column1), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row2, pieceHeight, column2), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row2, pieceHeight, column3), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row2, pieceHeight, column4), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row2, pieceHeight, column5), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row2, pieceHeight, column6), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row2, pieceHeight, column7), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row2, pieceHeight, column8), Quaternion.Euler(0, 0, 0));
+
+
+        Instantiate(fog, new Vector3(row3, pieceHeight, column1), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row3, pieceHeight, column2), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row3, pieceHeight, column3), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row3, pieceHeight, column4), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row3, pieceHeight, column5), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row3, pieceHeight, column6), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row3, pieceHeight, column7), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row3, pieceHeight, column8), Quaternion.Euler(0, 0, 0));
+
+
+        Instantiate(fog, new Vector3(row4, pieceHeight, column1), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row4, pieceHeight, column2), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row4, pieceHeight, column3), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row4, pieceHeight, column4), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row4, pieceHeight, column5), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row4, pieceHeight, column6), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row4, pieceHeight, column7), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row4, pieceHeight, column8), Quaternion.Euler(0, 0, 0));
+
+
+        Instantiate(fog, new Vector3(row5, pieceHeight, column1), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row5, pieceHeight, column2), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row5, pieceHeight, column3), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row5, pieceHeight, column4), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row5, pieceHeight, column5), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row5, pieceHeight, column6), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row5, pieceHeight, column7), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row5, pieceHeight, column8), Quaternion.Euler(0, 0, 0));
+
+
+        Instantiate(fog, new Vector3(row6, pieceHeight, column1), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row6, pieceHeight, column2), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row6, pieceHeight, column3), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row6, pieceHeight, column4), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row6, pieceHeight, column5), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row6, pieceHeight, column6), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row6, pieceHeight, column7), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row6, pieceHeight, column8), Quaternion.Euler(0, 0, 0));
+
+
+        Instantiate(fog, new Vector3(row7, pieceHeight, column1), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row7, pieceHeight, column2), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row7, pieceHeight, column3), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row7, pieceHeight, column4), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row7, pieceHeight, column5), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row7, pieceHeight, column6), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row7, pieceHeight, column7), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row7, pieceHeight, column8), Quaternion.Euler(0, 0, 0));
+
+
+        Instantiate(fog, new Vector3(row8, pieceHeight, column1), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row8, pieceHeight, column2), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row8, pieceHeight, column3), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row8, pieceHeight, column4), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row8, pieceHeight, column5), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row8, pieceHeight, column6), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row8, pieceHeight, column7), Quaternion.Euler(0, 0, 0));
+        Instantiate(fog, new Vector3(row8, pieceHeight, column8), Quaternion.Euler(0, 0, 0));
+    }
+
+    /*private void UpdateSelection()
     {
         if (!Camera.main)
             return;
@@ -151,16 +252,16 @@ public class ChessBoardManager : MonoBehaviour
             selectionX = -1;
             selectionY = -1;
         }
-    }
+    }*/
 
-    private void GetTileCenter(int x, int y)
+    /*private void GetTileCenter(int x, int y)
     {
         Vector3 origin = Vector3.zero;
         origin.x += (tileSize * x);
         origin.z += (tileSize * y);
-    }
+    }*/
 
-    private void DrawChessboard()
+    /*private void DrawChessboard()
     {
         // Vertical Lines
         Debug.DrawLine(new Vector3(drawBottom, drawHeight,  28), new Vector3(drawTop, drawHeight,  28));
@@ -190,5 +291,5 @@ public class ChessBoardManager : MonoBehaviour
                 Vector3.forward * selectionY + Vector3.right * selectionX,
                 Vector3.forward * (selectionY + 7) + Vector3.right * (selectionX + 7));
         }
-    }
+    }*/
 }
