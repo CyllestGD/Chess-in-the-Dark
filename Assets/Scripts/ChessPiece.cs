@@ -28,8 +28,7 @@ public class ChessPiece : MonoBehaviour
         {
             pawnMove();
         }
-        if (isRook == true)
-        {
+        if (isRook == true) {
             rookMove();
         }
         if (isKnight == true)

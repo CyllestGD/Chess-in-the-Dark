@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FogScript : MonoBehaviour {
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.tag == "WhitePiece")
         {
@@ -24,5 +24,9 @@ public class FogScript : MonoBehaviour {
         {
             gameObject.GetComponent<Renderer>().enabled = true;
         }
+    }
+    void OnMouseDown()
+    {
+        Debug.Log("The Fog Collider is TOO DAMN HIGH!");
     }
 }
